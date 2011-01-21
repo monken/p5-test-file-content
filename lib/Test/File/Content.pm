@@ -61,6 +61,7 @@ sub _check_files {
     @dirs = ('.') unless(@dirs);
     my @files;
     my $tree = File::Find::find( sub { push(@files, $File::Find::name) if($filter->($File::Find::name)) }, @dirs );
+    @files = sort @files;
     while ( my $file = shift @files ) {
         next if -d $file;
         $file = Path::Class::File->new($file);
